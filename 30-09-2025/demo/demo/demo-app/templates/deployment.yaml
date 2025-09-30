@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "demo-app.fullname" . }}
+  labels:
+    app: {{ include "demo-app.fullname" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "demo-app.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "demo-app.fullname" . }}
+    spec:
+      containers:
+        - name: {{ include "demo-app.fullname" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+          volumeMounts:
+            - name: app-config
+              mountPath: /config/application.yaml
+              subPath: application.yaml
+      volumes:
+        - name: app-config
+          secret:
+            secretName: {{ include "demo-app.fullname" . }}{{ .Values.secret.nameSuffix }}

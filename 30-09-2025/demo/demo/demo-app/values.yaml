@@ -1,0 +1,16 @@
+replicaCount: 1
+
+image:
+  repository: kishorek003/demo-app
+  tag: "1.0"
+  pullPolicy: IfNotPresent
+
+service:
+  type: NodePort
+  port: 8080
+  #nodePort: 31378   # optional: set only if you want a fixed NodePort
+
+secret:
+  nameSuffix: "-config"   # used to compose secret name: <release>-demo-app-config
+
+resources: {}
