@@ -48,12 +48,19 @@ Open in browser
 _Here are the screenshots of the task :_
 
 1. **Spring Boot app running locally**
+   - ![SS1](img/Picture1.png)
 2. **Built Docker Image of the java application**
+   - ![SS1](img/Picture2png.png)
 3. **My Kind Cluster is running**
+   - ![SS1](img/Picture3.png)
 4. **Kubernetes deployment & service created**
+   - ![SS1](img/Picture4.png)
 5. **Secret mounted**
+    - ![SS1](img/Picture5.png)
 6. **Helm chart repo live on ArtifactHub**
+    - ![SS1](img/Picture6.png)
 7. **Helm install success**
+   - ![SS1](img/Picture7.png)
    
 
 
