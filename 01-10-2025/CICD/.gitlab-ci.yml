@@ -1,0 +1,93 @@
+stages:
+  - build
+  - test
+  - docker
+  - deploy
+
+# 1) Build: package site into artifact
+build:
+  image: alpine:3.18
+  stage: build
+  script:
+    - |
+      echo "Packaging site files..."
+      apk add --no-cache zip
+      zip -r site.zip .
+  artifacts:
+    paths:
+      - site.zip
+    expire_in: 1 hour
+
+# 2) Test: basic sanity checks using the artifact produced above
+test:
+  image: alpine:3.18
+  stage: test
+  dependencies:
+    - build
+  script:
+    - |
+      echo "Running basic tests..."
+      apk add --no-cache unzip grep
+      unzip site.zip -d site
+      if [ ! -f site/index.html ]; then
+        echo "ERROR: index.html missing!"
+        exit 1
+      fi
+      if ! grep -q "<!DOCTYPE html" site/index.html; then
+        echo "WARNING: index.html may not have <!DOCTYPE html>"
+      fi
+
+# 3) Docker: build image and push both commit tag and latest
+docker-build-push:
+  image: docker:24.0.2
+  stage: docker
+  services:
+    - docker:dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_TLS_CERTDIR: ""
+  before_script:
+    - |
+      # login to Docker Hub using CI variables (set these in GitLab project settings)
+      echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+  script:
+    - |
+      set -e
+      IMAGE="$DOCKER_USER/$CI_PROJECT_NAME"
+      echo "Building $IMAGE with tags: $CI_COMMIT_SHORT_SHA and latest"
+      docker build -t "$IMAGE:$CI_COMMIT_SHORT_SHA" -t "$IMAGE:latest" .
+      docker push "$IMAGE:$CI_COMMIT_SHORT_SHA"
+      docker push "$IMAGE:latest"
+  only:
+    - main
+
+# 4) Deploy: SSH to EC2, pull image and run container
+deploy-ec2:
+  image: alpine:3.18
+  stage: deploy
+  before_script:
+    - |
+      # install ssh client
+      apk add --no-cache openssh-client
+  script:
+    - |
+      # write the multi-line private key from the CI variable to a file
+      mkdir -p ~/.ssh
+      printf '%s\n' "$EC2_SSH_KEY" > ~/.ssh/id_rsa
+      chmod 600 ~/.ssh/id_rsa
+      # Ensure known_hosts check is bypassed for first time; use with caution in production
+      SSH_TARGET="$EC2_USER@$EC2_HOST"
+      echo "Deploying to $SSH_TARGET"
+      ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa "$SSH_TARGET" \
+        "docker pull $DOCKER_USER/$CI_PROJECT_NAME:latest && \
+         docker stop web || true && \
+         docker rm web || true && \
+         docker run -d --name web -p 80:80 $DOCKER_USER/$CI_PROJECT_NAME:latest"
+    - |
+      # optional simple health check from the runner (keeps it short so logs are readable)
+      echo "Waiting 3s for container to start..."
+      sleep 3
+      http_status=$(wget --spider -S "http://$EC2_HOST" 2>&1 | awk '/HTTP\//{print $2}' | head -n1 || echo "000")
+      echo "HTTP status returned from http://$EC2_HOST : $http_status"
+  only:
+    - main
