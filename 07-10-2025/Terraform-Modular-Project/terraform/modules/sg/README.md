@@ -2,16 +2,17 @@
 - Security Groups act as virtual firewalls for controlling inbound and outbound traffic to AWS resources like EC2 instances or Load Balancers.
 
 ***Flow Overview:***
+- aws_security_group "bastion" – Creates a security group for the Bastion host.
+  - Ingress: Allows SSH (port 22) access only from the CIDR specified in var.bastion_allowed_cidr.
+  - Egress: Allows all outbound traffic to anywhere (0.0.0.0/0).
 
-1) Inbound Rules – Define which traffic is allowed to enter your resource.
-Example: Allow HTTP (port 80) or SSH (port 22) from specific IPs or networks.
+- aws_security_group "web" – Creates a security group for web servers.
+  - Ingress: Allows HTTP (port 80) traffic only from the ALB security group.
+  - Egress: Allows all outbound traffic to anywhere (0.0.0.0/0).
 
-2) Outbound Rules – Define which traffic is allowed to leave your resource.
-Example: Allow all outbound traffic to the internet or specific destinations.
-
-3) Association – Security groups are attached to resources (EC2, ALB, etc.) to enforce these rules at the instance or service level.
-
-4) Stateful Behavior – If inbound traffic is allowed, the return traffic is automatically permitted (no need for a matching outbound rule).
+- aws_security_group "alb" – Creates a security group for the Application Load Balancer (ALB).
+  - Ingress: Allows HTTP (port 80) traffic from anywhere (0.0.0.0/0).
+  - Egress: Allows all outbound traffic to anywhere (0.0.0.0/0).
 
 ***Purpose:***
 - Enhances security by strictly controlling allowed network access and protecting AWS resources from unauthorized traffic.
