@@ -7,4 +7,4 @@ Then, create an Application Load Balancer (ALB) in the public subnet that:
 - This ALB Routes HTTP traffic to the webserver (private EC2).
 - Uses a health check to monitor the webserver’s status.
 
-Additionally created a resuable module for creation of VPC, Security Groups, and Loadbalancer. 
+Additionally created a resuable module for creation of VPC, Security Groups, and Loadbalancer. Also Implemented environment-specific configurations (dev environment) using separate Terraform.tfvars and folder structure, making the infrastructure modular and reusable for other environments in the future.  
