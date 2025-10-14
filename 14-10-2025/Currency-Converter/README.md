@@ -9,5 +9,8 @@
 - accessed using the localhost
 
 #### Screenshots for the reference
-
-
+- Kind cluster running & App Also containerized (currency-app)
+  - ![SS1](Screenshots/Docker.png)
+    
+- Converted the docker file to docker container
+  - ![SS1](Screenshots/Docker_images.png)
