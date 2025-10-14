@@ -14,3 +14,9 @@
     
 - Converted the docker file to docker container
   - ![SS1](Screenshots/Docker_images.png)
+
+- Loaded the image and the pods running
+  - ![SS1](Screenshots/pods.png)
+
+- Accessed using localhost
+  - ![SS1](Screenshots/Output.png)
