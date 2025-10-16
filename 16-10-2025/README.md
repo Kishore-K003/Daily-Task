@@ -26,3 +26,11 @@
 7. **Tested the application**
    - Copied the LoadBalancer address from the ingress controller and opened the URL in a browser
 
+
+### Here are the screenshots
+- Here is my cluster created
+  - ![SS1](Screenshots/cluster.png)
+- EKS Cluster created ec2 nodes as a worker nodes
+  - ![SS1](Screenshots/nodes.png)
+- Screenshot of the output page
+  - ![SS1](Screenshots/output.png)
