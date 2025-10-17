@@ -19,6 +19,7 @@ This helps maintain consistency, traceability, and easy rollback in deployments.
 
 - ***Prepared Git Repository***
   - Pushed all Kubernetes manifest files (Deployment, Service, Ingress.) to a GitHub repository.
+  - Here is the Github Repo - https://github.com/Kishore-K003/Argo-CD-Demo/tree/main
     - ![SS6](Screenshots/Git.png) 
 
 - ***Linked GitHub Repo to Argo CD***
@@ -29,4 +30,5 @@ This helps maintain consistency, traceability, and easy rollback in deployments.
   - Argo CD automatically deployed the application from the Git repo to the EKS cluster.
   - Here is the output.
     - ![SS8](Screenshots/output.png) 
+
 
