@@ -2,6 +2,8 @@ Currency App Deployment on EKS and setting up monitoring Dashboard
 
 - Created EKS Cluster
   - Set up a new EKS cluster with a managed node group.
+  - ![SS1](Screenshots/cluster.png)
+  - ![SS1](Screenshots/nodes.png)
 
 - Deployed the Website
   - Deployed the currency-app Docker image to the cluster using Kubernetes Deployment and Service.
@@ -14,3 +16,6 @@ Currency App Deployment on EKS and setting up monitoring Dashboard
 - Accessed Grafana Dashboard
   - Port-forwarded Grafana service to access the dashboard locally.
   - Verified that CPU, memory, and pod metrics are visible.
+  - ![SS1](Screenshots/grafana.png)
+  - ![SS1](Screenshots/output.png)
+
