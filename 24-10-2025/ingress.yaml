@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: simple-api-ingress
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /account
+        pathType: Prefix
+        backend:
+          service:
+            name: simple-api-service
+            port:
+              number: 80
+      - path: /addaccount
+        pathType: Prefix
+        backend:
+          service:
+            name: simple-api-service
+            port:
+              number: 80
