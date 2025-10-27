@@ -68,9 +68,9 @@ helm repo update`
   - ![](Screenshots/Addin.png)
   - ![](Screenshots/Addout.png)
   
-- **UPDATE METHOD**
-  - ![](Screenshots/Upin.png)
-  - ![](Screenshots/Upout.png)
+- **PUT METHOD**
+  - ![](Screenshots/Putin.png)
+  - ![](Screenshots/Putout.png)
 
 - **DELETE METHOD**
   - ![](Screenshots/Delin.png)
