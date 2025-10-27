@@ -2,7 +2,7 @@
 
 ##### Steps I Performed to implement this
 
-- **Created Node (Express) API Service (Got Help From Google To Write Code)**
+- **Created Node (Express.js) API Service (Got Help From Google To Write Code)**
   - Developed endpoints:
     - GET /account – fetch accounts
     - POST /addaccount – add new account
@@ -55,7 +55,7 @@ helm repo update`
   - `kubectl apply -f deployment.yaml`
   - `kubectl apply -f service.yaml`
   - `kubectl apply -f ingress.yaml` 
-- **Created a API Gateway integrate with the alb url & created a route**
+- **Created a API Gateway , integrated with the alb url & created a route**
   - https://k3mg9s1brc.execute-api.ap-south-1.amazonaws.com/account -> GET METHOD
   - https://k3mg9s1brc.execute-api.ap-south-1.amazonaws.com/addaccount -> POST METHOD
   - https://k3mg9s1brc.execute-api.ap-south-1.amazonaws.com/account{id} -> PUT METHOD
