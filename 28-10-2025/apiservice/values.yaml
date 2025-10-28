@@ -1,0 +1,17 @@
+image:
+  repository: kishorek003/simple-api
+  tag: latest
+  
+
+ports:
+  port: 3000
+  serviceport: 80
+  servicetargetport: 3000
+  ingressport: 80
+
+replicas: 2
+accountid: 078681887373
+
+names:
+  serviceaccountname: aws-load-balancer-controller
+  serviceaccountnamespace: kube-system

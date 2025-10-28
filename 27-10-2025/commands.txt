@@ -1,0 +1,17 @@
+Invoke-RestMethod -Uri "https://k3mg9s1brc.execute-api.ap-south-1.amazonaws.com/addaccount" `
+   -Method POST `
+   -Headers @{ "Content-Type" = "application/json" } `
+   -Body '{"id":"004","name":"Amarjith"}'
+  
+
+
+Invoke-RestMethod -Uri "https://k3mg9s1brc.execute-api.ap-south-1.amazonaws.com/account/001" `
+  -Method DELETE
+
+
+
+Invoke-RestMethod -Uri "https://k3mg9s1brc.execute-api.ap-south-1.amazonaws.com/account/001" `
+  -Method PUT `
+  -Headers @{ "Content-Type" = "application/json" } `
+  -Body '{"id":"001","name":"Amarjith Selvakumar"}'
+

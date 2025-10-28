@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-api
+spec:
+  replicas: "{{ .Values.replicas }}"
+  selector:
+    matchLabels:
+      app: simple-api
+  template:
+    metadata:
+      labels:
+        app: simple-api
+    spec:
+      containers:
+      - name: simple-api
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}" 
+        ports:
+        - containerPort: "{{ .Values.ports.port }}"
