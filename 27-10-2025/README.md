@@ -43,8 +43,8 @@ https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/m
   --approve`
     
 - **Install AWS Load Balancer Controller using Helm**
-  - `helm repo add eks https://aws.github.io/eks-charts
-helm repo update`
+  - `helm repo add eks https://aws.github.io/eks-charts`
+  - `helm repo update`
   - `helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
   -n kube-system \
   --set clusterName=simple-api-cluster \
