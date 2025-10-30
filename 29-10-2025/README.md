@@ -18,10 +18,10 @@
 
 #### Screenshots
 - `/addbankaccount`
-  - ![](Screenshots/Post)
+  - ![](Screenshots/Post.png)
 - `/getaccount`
-  - ![](Screenshots/Get)
+  - ![](Screenshots/Get.png)
 - API Gateway
-  - ![](Screenshots/Api)
+  - ![](Screenshots/Api.png)
 - Loadbalancers 
-  - ![](Screenshots/Get) 
+  - ![](Screenshots/Lb.png) 
